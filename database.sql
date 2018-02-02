@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS teripa_players;
+CREATE TABLE teripa_players (
+    player_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(24) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    verify TINYINT NOT NULL DEFAULT 0,
+    money BIGINT NOT NULL DEFAULT 5000
+);
+
+DROP TABLE IF EXISTS teripa_sessions;
+CREATE TABLE teripa_sessions (
+    session_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    player_id INT UNSIGNED NOT NULL,
+    session VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL
+);
