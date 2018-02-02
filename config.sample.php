@@ -17,4 +17,7 @@ $config['languages']['nl'] = 'Nederlands';
 $config['default_language'] = 'en';
 
 // Session expire time (in seconds)
-$config['login_time'] = 2 * 60;
+$config['session_expire_time'] = 2 * 60;
+
+// Sign up start money
+$config['start_money'] = 5000;

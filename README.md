@@ -10,6 +10,6 @@ With a organised structure and encrypted POST tokens.
 
     `git clone https://github.com/bplaat/teripa.git`
 
-- Rename the file config.example.php to config.php and fill in the your details
+- Rename the file `config.example.php` to `config.php` and fill in the your details
 
-- Run the database.sql file in your database client to create the tables
+- Uncommand the `database_create_tables();` to create the database tables
