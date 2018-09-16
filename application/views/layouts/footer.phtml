@@ -1,0 +1,4 @@
+        <p>Made by <a href="https://bastiaan.plaatsoft.nl/" target="_blank">Bastiaan van der Plaat</a></p>
+        <p><code><?= round((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']) * 1000, 1)  ?> ms - <?= Database::queryCount() ?> queries</code></p>
+    </body>
+</html>

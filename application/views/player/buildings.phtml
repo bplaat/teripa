@@ -1,0 +1,27 @@
+<?= view('layouts.header', [ 'title' => 'Buildings' ]) ?>
+
+<h1>Buildings</h1>
+<table>
+    <?php foreach ($buildings as $building): ?>
+        <tr>
+            <td>
+                <img width="150" src="/images/buildings/<?= $building->building_id ?>.jpg">       
+            </td>
+            <td>
+                <h3><?= $building->name ?></h3>
+                <p>Income: <?= income_format($building->income) ?> - Defence: <?= defence_format($building->defence) ?></p>
+            </td>
+            <td>
+                <p>Price: <?= money_format($building->price) ?></p>
+            </td>
+            <td>
+                <p><?= $building->amount ?></p>
+            </td>
+            <td>
+                <p><a href="/buy_buildings?building_id=<?= $building->building_id ?>&amount=1">Buy</a></p>
+            </td>
+        </tr>
+    <?php endforeach ?>
+</table>
+
+<?= view('layouts.footer') ?>

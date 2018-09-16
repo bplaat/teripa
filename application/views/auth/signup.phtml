@@ -1,0 +1,32 @@
+<?= view('layouts.header', [ 'title' => 'Sign up' ]) ?>
+
+<h1>Sign up</h1>
+
+<?php if (isset($_SESSION['errors'])): ?>
+    <ul>
+        <?php foreach ($_SESSION['errors'] as $error): ?>
+            <li><?= $error ?></li>
+        <?php endforeach ?>
+    </ul>
+<?php endif ?>
+
+<form action="/auth/signup" method="post">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" autofocus>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+    </div>
+    <div>
+        <input type="submit" value="Sign up">
+    </div>
+</form>
+
+
+<?= view('layouts.footer') ?>
