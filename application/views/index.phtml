@@ -1,9 +1,0 @@
-<?= view('layouts.header', [ 'title' => 'Home' ]) ?>
-
-<?php if (Auth::check()): ?>
-    <h1>Welcome, <?= Auth::player()->username ?>!</h1>
-<?php else: ?>
-    <h1>Home</h1>
-<?php endif ?>
-
-<?= view('layouts.footer') ?>

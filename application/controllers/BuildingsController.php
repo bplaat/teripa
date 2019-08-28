@@ -1,28 +1,101 @@
 <?php
 
 class BuildingsController {
-    public static function list () {
-        $buildings = Buildings::select()->fetchAll();
-        $player_buildings = PlayerBuilding::select([ 'player_id' => Auth::player()->player_id ])->fetchAll();
-        foreach ($player_buildings as $building) $buildings[array_search($building->building_id, array_column($buildings, 'building_id'))]->amount = $building->amount;
-        return view('player.buildings', [ 'buildings' => $buildings ]);
+    public static function index () {
+        Router::redirect('/buildings/' . slug(BuildingGroups::select()->fetch()->name));
+    }
+
+    public static function list ($building_group_slug) {
+        $building_group_id = 1;
+        $building_groups = BuildingGroups::select()->fetchAll();
+        foreach ($building_groups as $building_group) {
+            if (slug($building_group->name) == $building_group_slug) {
+                $building_group_id = $building_group->id;
+                break;
+            }
+        }
+
+        $buildings = Buildings::select([ 'building_group_id' => $building_group_id ])->fetchAll();
+        foreach ($buildings as $building) {
+            $player_buildings_query = PlayerBuildings::select([ 'player_id' => Auth::player()->id, 'building_id' => $building->id ]);
+            if ($player_buildings_query->rowCount() == 1) {
+                $building->amount = $player_buildings_query->fetch()->amount;
+            } else {
+                $building->amount = 0;
+            }
+        }
+        view('player/buildings', [ 'building_group_id' => $building_group_id, 'building_groups' => $building_groups, 'buildings' => $buildings ]);
     }
 
     public static function buy () {
+        $building_id = $_GET['id'];
+        $amount = $_GET['amount'];
         $player = Auth::player();
-        $building_query = Buildings::select($_GET['building_id']);
-            $amount = isset($_GET['amount']) ? $_GET['amount'] : 1;
-            if ($building_query->rowCount() == 1 && (string)(int)$amount == $amount) {
-                $building = $building_query->fetch();
-                if ($player->money >= $building->price * $amount) {
-                    Database::query('UPDATE player_building SET amount = amount + ? WHERE player_id = ? AND building_id = ?', [ $amount, $player->player_id, $_GET['building_id'] ]);
-                    Database::query('UPDATE players SET money = ?, income = ?, defence = ? WHERE player_id = ?', [ $player->money -= $building->price * $amount, $player->income += $building->income * $amount, $player->defence += $building->defence * $amount, $player->player_id ]);
-                    Router::redirect('/buildings');
+        $building_query = Buildings::select($building_id);
+        if ($building_query->rowCount() == 1) {
+            $building = $building_query->fetch();
+            if ($player->money >= $building->price * $amount) {
+
+                $player_buildings_query = PlayerBuildings::select([
+                    'player_id' => $player->id,
+                    'building_id' => $building_id
+                ]);
+                if ($player_buildings_query->rowCount() == 1) {
+                    PlayerBuildings::update([
+                        'player_id' => $player->id,
+                        'building_id' => $building_id
+                    ], [
+                        'amount' => $player_buildings_query->fetch()->amount + $amount
+                    ]);
                 } else {
-                    echo json_encode([ 'no_money' => false ]);
+                    PlayerBuildings::insert([
+                        'player_id' => $player->id,
+                        'building_id' => $building_id,
+                        'amount' => $amount
+                    ]);
                 }
-            } else {
-                http_response_code(400);
+
+                Players::update($player->id, [
+                    'money' => $player->money - $building->price * $amount,
+                    'income' => $player->income + $building->income * $amount,
+                    'defence'=> $player->defence + $building->defence * $amount
+                ]);
             }
+        }
+        Router::back();
+    }
+
+    public static function sell () {
+        $building_id = $_GET['id'];
+        $amount = $_GET['amount'];
+        $player = Auth::player();
+        $building_query = Buildings::select($building_id);
+        if ($building_query->rowCount() == 1) {
+            $building = $building_query->fetch();
+
+            $player_buildings_query = PlayerBuildings::select([
+                'player_id' => $player->id,
+                'building_id' => $building_id
+            ]);
+            if ($player_buildings_query->rowCount() == 1) {
+                $player_buildings = $player_buildings_query->fetch();
+                if ($player_buildings->amount - $amount >= 0) {
+
+                    PlayerBuildings::update([
+                        'player_id' => $player->id,
+                        'building_id' => $building_id
+                    ], [
+                        'amount' => $player_buildings->amount - $amount
+                    ]);
+
+                    Players::update($player->id, [
+                        'money' => $player->money + floor($building->price / 2) * $amount,
+                        'income' => $player->income - $building->income * $amount,
+                        'defence'=> $player->defence - $building->defence * $amount
+                    ]);
+                }
+            }
+        }
+        Router::back();
     }
 }
