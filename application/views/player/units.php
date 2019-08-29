@@ -19,8 +19,44 @@
             <td>Price: <span class="money">$ <?= number_format($unit->price) ?></span>
             <td><?= $unit->amount ?></td>
             <td>
-                <a href="/buy_units?id=<?= $unit->id ?>&amount=1">Buy</a> &nbsp;
-                <a href="/sell_units?id=<?= $unit->id ?>&amount=1">Sell</a>
+                <form method="post">
+                    <input type="hidden" name="id" value="<?= $unit->id ?>">
+                    <select class="small" name="amount">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="500">500</option>
+                        <?php if (Auth::player()->money >= $unit->price): ?>
+                            <option value="<?= floor(Auth::player()->money / $unit->price) ?>"><?= floor(Auth::player()->money / $unit->price) ?></option>
+                        <?php endif ?>
+                    </select>
+                    <button class="inline" type="submit" name="action" value="buy">Buy</button>
+                </form>
+            </td>
+            <td>
+                <form method="post">
+                    <input type="hidden" name="id" value="<?= $unit->id ?>">
+                    <select class="small" name="amount">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="500">500</option>
+                        <?php if ($unit->amount > 0): ?>
+                            <option value="<?= $unit->amount ?>"><?= $unit->amount ?></option>
+                        <?php endif ?>
+                    </select>
+                    <button class="inline" type="submit" name="action" value="sell">Sell</button>
+                </form>
             </td>
         </tr>
     <?php endforeach ?>

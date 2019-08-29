@@ -43,12 +43,25 @@ button {
     cursor: pointer;
 }
 
-a {
+button.inline {
+    display: inline;
+    border: 0;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.small {
+    padding: 6px 8px;
+    margin: 8px 0;
+}
+
+a, button.inline {
     text-decoration: none;
     color: orange;
 }
 
-a:hover, a:focus {
+a:hover, a:focus, button.inline:hover, button.inline:focus {
     text-decoration: underline overline;
     color: yellow;
 }

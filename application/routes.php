@@ -5,14 +5,10 @@ Router::route('/about', 'PagesController::about');
 
 if (Auth::check()) {
     Router::route('/buildings', 'BuildingsController::index');
-    Router::route('/buildings/(.*)', 'BuildingsController::list');
-    Router::route('/buy_buildings', 'BuildingsController::buy');
-    Router::route('/sell_buildings', 'BuildingsController::sell');
+    Router::route('/buildings/(.*)', 'BuildingsController::show');
 
     Router::route('/units', 'UnitsController::index');
-    Router::route('/units/(.*)', 'UnitsController::list');
-    Router::route('/buy_units', 'UnitsController::buy');
-    Router::route('/sell_units', 'UnitsController::sell');
+    Router::route('/units/(.*)', 'UnitsController::show');
 
     Router::route('/battle', 'BattleController::list');
     Router::route('/attack', 'BattleController::attack');
