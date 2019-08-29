@@ -3,7 +3,7 @@
 Router::route('/', 'PagesController::home');
 Router::route('/about', 'PagesController::about');
 
-if (Auth::check()) {
+if (!is_null(Auth::player())) {
     Router::route('/buildings', 'BuildingsController::index');
     Router::route('/buildings/(.*)', 'BuildingsController::show');
 
@@ -22,6 +22,7 @@ if (Auth::check()) {
 
     if (Auth::player()->role == ROLE_ADMIN) {
         Router::route('/admin', 'AdminController::index');
+        Router::route('/admin/migrate', 'AdminController::migrate');
 
         Router::route('/admin/players', 'AdminPlayersController::index');
         Router::route('/admin/players/(.*)/edit', 'AdminPlayersController::edit');

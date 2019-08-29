@@ -9,7 +9,7 @@
 <table>
     <?php foreach ($buildings as $building): ?>
         <tr>
-            <td style="width: 0;">
+            <td style="width: 150px;">
                 <img width="150" src="/images/buildings/<?= slug(findById($building_groups, $building_group_id)->name) ?>/<?= $building->position ?>.jpg">
             </td>
             <td>

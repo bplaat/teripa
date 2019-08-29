@@ -9,7 +9,7 @@
 <table>
     <?php foreach ($units as $unit): ?>
         <tr>
-            <td style="width: 0;">
+            <td style="width: 150px;">
                 <img width="150" src="/images/units/<?= slug(findById($unit_groups, $unit_group_id)->name) ?>/<?= $unit->position ?>.jpg">
             </td>
             <td>

@@ -1,4 +1,4 @@
-<?php if (Auth::check()): ?>
+<?php if (!is_null(Auth::player())): ?>
     <table>
         <tr>
             <td style="width: 240px;">Money: <span id="money_timer" class="money">$ <?= number_format(Auth::player()->money) ?></span></td>
@@ -13,7 +13,7 @@
     <tr>
         <td>
             <a <?= Router::path() == '/' ? 'class="active"' : '' ?> href="/">Home</a> &nbsp;
-            <?php if (Auth::check()): ?>
+            <?php if (!is_null(Auth::player())): ?>
                 <a <?= Router::path() == '/battle' ? 'class="active"' : '' ?> href="/battle">Battle</a> &nbsp;
                 <a <?= startsWith(Router::path(), '/units') ? 'class="active"' : '' ?> href="/units">Units</a> &nbsp;
                 <a <?= startsWith(Router::path(), '/buildings') ? 'class="active"' : '' ?> href="/buildings">Buildings</a>
@@ -22,7 +22,7 @@
             <?php endif ?>
         </td>
         <td style="width: 275px; border-left: 1px solid #fff">
-            <?php if (Auth::check()): ?>
+            <?php if (!is_null(Auth::player())): ?>
                 <img class="avatar" style="float: left; margin-right: 16px;" src="https://www.gravatar.com/avatar/<?= md5(Auth::player()->email) ?>?s=48">
                 <div style="flex-direction: column;">
                     <div><?= Auth::player()->first_name ?> <?= Auth::player()->last_name ?></div>

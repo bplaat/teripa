@@ -1,4 +1,4 @@
-    <?php if (Auth::check()): ?>
+    <?php if (!is_null(Auth::player())): ?>
         <script>
             var moneyTimer = document.getElementById('money_timer');
             var money = <?= Auth::player()->money ?>;
