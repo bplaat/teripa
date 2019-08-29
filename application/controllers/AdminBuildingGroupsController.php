@@ -19,9 +19,13 @@ class AdminBuildingGroupsController {
 
     public static function edit ($id) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $old_name = BuildingGroups::select($id)->fetch()->name;
             BuildingGroups::update($id, [
                 'name' => $_POST['name']
             ]);
+            if (is_dir(ROOT . '/public/images/buildings/' . slug($old_name))) {
+                rename(ROOT . '/public/images/buildings/' . slug($old_name), ROOT . '/public/images/buildings/' . slug($_POST['name']));
+            }
             Router::redirect('/admin/building_groups');
         } else {
             $building_group = BuildingGroups::select($id)->fetch();

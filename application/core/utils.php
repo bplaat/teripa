@@ -21,6 +21,6 @@ function findById ($items, $id) {
     }
 }
 
-function slug($string) {
+function slug ($string) {
     return str_replace(' ', '_', strtolower($string));
 }

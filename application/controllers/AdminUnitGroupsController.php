@@ -19,9 +19,13 @@ class AdminUnitGroupsController {
 
     public static function edit ($id) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $old_name = UnitGroups::select($id)->fetch()->name;
             UnitGroups::update($id, [
                 'name' => $_POST['name']
             ]);
+            if (is_dir(ROOT . '/public/images/units/' . slug($old_name))) {
+                rename(ROOT . '/public/images/units/' . slug($old_name), ROOT . '/public/images/units/' . slug($_POST['name']));
+            }
             Router::redirect('/admin/unit_groups');
         } else {
             $unit_group = UnitGroups::select($id)->fetch();

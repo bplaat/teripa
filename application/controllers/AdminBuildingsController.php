@@ -8,6 +8,7 @@ class AdminBuildingsController {
     }
 
     public static function create () {
+        $building_groups = BuildingGroups::select()->fetchAll();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             Buildings::insert([
                 'building_group_id' => $_POST['building_group_id'],
@@ -18,18 +19,19 @@ class AdminBuildingsController {
                 'defence' => $_POST['defence']
             ]);
             if (isset($_FILES['image'])) {
-                move_uploaded_file($_FILES['image']['tmp_name'], ROOT . '/public/images/buildings/' . $_POST['position'] . '.jpg');
+                $folder = ROOT . '/public/images/buildings/' . slug(findById($building_groups, $_POST['building_group_id'])->name);
+                if (!is_dir($folder)) mkdir($folder);
+                move_uploaded_file($_FILES['image']['tmp_name'],  $folder . '/' . $_POST['position'] . '.jpg');
             }
             Router::redirect('/admin/buildings');
         } else {
-            $building_groups = BuildingGroups::select()->fetchAll();
             view('admin/buildings/create', [ 'building_groups' => $building_groups ]);
         }
     }
 
     public static function edit ($id) {
+        $building_groups = BuildingGroups::select()->fetchAll();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $building = Buildings::select($id)->fetch();
             Buildings::update($id, [
                 'building_group_id' => $_POST['building_group_id'],
                 'position' => $_POST['position'],
@@ -39,7 +41,9 @@ class AdminBuildingsController {
                 'defence' => $_POST['defence']
             ]);
             if (isset($_FILES['image'])) {
-                move_uploaded_file($_FILES['image']['tmp_name'], ROOT . '/public/images/buildings/' . slug(findById($building_groups, $building_group_id)->name) . '/' . $building->position . '.jpg');
+                $folder = ROOT . '/public/images/buildings/' . slug(findById($building_groups, $_POST['building_group_id'])->name);
+                if (!is_dir($folder)) mkdir($folder);
+                move_uploaded_file($_FILES['image']['tmp_name'],  $folder . '/' . $_POST['position'] . '.jpg');
             }
 
             $players = Players::select()->fetchAll();
@@ -57,7 +61,6 @@ class AdminBuildingsController {
 
             Router::redirect('/admin/buildings');
         } else {
-            $building_groups = BuildingGroups::select()->fetchAll();
             $building = Buildings::select($id)->fetch();
             view('admin/buildings/edit', [ 'building_groups' => $building_groups, 'building' => $building ]);
         }

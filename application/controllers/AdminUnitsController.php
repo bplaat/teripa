@@ -8,6 +8,7 @@ class AdminUnitsController {
     }
 
     public static function create () {
+        $unit_groups = UnitGroups::select()->fetchAll();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             Units::insert([
                 'unit_group_id' => $_POST['unit_group_id'],
@@ -18,18 +19,19 @@ class AdminUnitsController {
                 'defence' => $_POST['defence']
             ]);
             if (isset($_FILES['image'])) {
-                move_uploaded_file($_FILES['image']['tmp_name'], ROOT . '/public/images/units/' . $_POST['position'] . '.jpg');
+                $folder = ROOT . '/public/images/units/' . slug(findById($unit_groups, $_POST['unit_group_id'])->name);
+                if (!is_dir($folder)) mkdir($folder);
+                move_uploaded_file($_FILES['image']['tmp_name'],  $folder . '/' . $_POST['position'] . '.jpg');
             }
             Router::redirect('/admin/units');
         } else {
-            $unit_groups = UnitGroups::select()->fetchAll();
             view('admin/units/create', [ 'unit_groups' => $unit_groups ]);
         }
     }
 
     public static function edit ($id) {
+        $unit_groups = UnitGroups::select()->fetchAll();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $unit = Units::select($id)->fetch();
             Units::update($id, [
                 'unit_group_id' => $_POST['unit_group_id'],
                 'position' => $_POST['position'],
@@ -39,7 +41,9 @@ class AdminUnitsController {
                 'defence' => $_POST['defence']
             ]);
             if (isset($_FILES['image'])) {
-                move_uploaded_file($_FILES['image']['tmp_name'], ROOT . '/public/images/units/' . slug(findById($unit_groups, $unit_group_id)->name) . '/' . $unit->position . '.jpg');
+                $folder = ROOT . '/public/images/units/' . slug(findById($unit_groups, $_POST['unit_group_id'])->name);
+                if (!is_dir($folder)) mkdir($folder);
+                move_uploaded_file($_FILES['image']['tmp_name'],  $folder . '/' . $_POST['position'] . '.jpg');
             }
 
             $players = Players::select()->fetchAll();
@@ -57,7 +61,6 @@ class AdminUnitsController {
 
             Router::redirect('/admin/units');
         } else {
-            $unit_groups = UnitGroups::select()->fetchAll();
             $unit = Units::select($id)->fetch();
             view('admin/units/edit', [ 'unit_groups' => $unit_groups, 'unit' => $unit ]);
         }
