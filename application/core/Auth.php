@@ -3,10 +3,19 @@
 class Auth {
     protected static $session, $player;
 
+    private static function generateSession () {
+        $session = md5(microtime() . $_SERVER['REMOTE_ADDR']);
+        if (Sessions::select($session)->rowCount() == 1) {
+            return static::generateSession();
+        }
+        return $session;
+    }
+
     private static function createSession ($player_id) {
-        session_regenerate_id();
+        $session = static::generateSession();
+        setcookie(SESSION_COOKIE_NAME, $session, time() + SESSION_DURATION);
         Sessions::insert([
-            'session' => session_id(),
+            'session' => $session,
             'player_id' => $player_id,
             'expires_at' => date('Y-m-d H:i:s', time() + SESSION_DURATION)
         ]);
@@ -14,6 +23,9 @@ class Auth {
 
     public static function revokeSession ($session) {
         Sessions::update($session, [ 'expires_at' => date('Y-m-d H:i:s') ]);
+        if ($_COOKIE[SESSION_COOKIE_NAME] == $session) {
+            setcookie(SESSION_COOKIE_NAME, '', time() - 3600);
+        }
     }
 
     public static function signin ($login, $password) {
@@ -55,19 +67,25 @@ class Auth {
 
     public static function check () {
         if (is_null(static::$session)) {
-            $session_query = Sessions::select(session_id());
-            if ($session_query->rowCount() == 1) {
-                $session = $session_query->fetch();
-                if (strtotime($session->expires_at) > time()) {
-                    static::$session = $session;
-                    static::$player = Players::select($session->player_id)->fetch();
-                    static::$player->money += static::$player->income * (time() - strtotime(static::$player->paid_at));
-                    static::$player->paid_at = date('Y-m-d H:i:s');
-                    Players::update(static::$player->id, [
-                        'money' => static::$player->money,
-                        'paid_at' => static::$player->paid_at
-                    ]);
-                    return true;
+            if (isset($_COOKIE[SESSION_COOKIE_NAME])) {
+                $session_query = Sessions::select($_COOKIE[SESSION_COOKIE_NAME]);
+                if ($session_query->rowCount() == 1) {
+                    $session = $session_query->fetch();
+                    if (strtotime($session->expires_at) > time()) {
+                        static::$session = $session;
+                        static::$player = Players::select($session->player_id)->fetch();
+                        static::$player->money += static::$player->income * (time() - strtotime(static::$player->paid_at));
+                        static::$player->paid_at = date('Y-m-d H:i:s');
+                        Players::update(static::$player->id, [
+                            'money' => static::$player->money,
+                            'paid_at' => static::$player->paid_at
+                        ]);
+                        return true;
+                    } else {
+                        if ($_COOKIE[SESSION_COOKIE_NAME] == $session->session) {
+                            setcookie(SESSION_COOKIE_NAME, '', time() - 3600);
+                        }
+                    }
                 }
             }
             return false;

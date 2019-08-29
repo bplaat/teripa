@@ -5,7 +5,7 @@ define('DATABASE_USER', 'teripa');
 define('DATABASE_PASSWORD', 'AwriaIKTLbHMvVAW');
 define('DATABASE_NAME', 'teripa');
 
-define('SESSION_NAME', 'teripa_session');
+define('SESSION_COOKIE_NAME', 'teripa_session');
 define('SESSION_DURATION', 60 * 60 * 24 * 356);
 
 define('ROLE_NORMAL', 0);

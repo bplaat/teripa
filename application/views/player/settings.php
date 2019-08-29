@@ -54,7 +54,7 @@
         Name: <code><?= $session->session ?></code><br>
         Created on: <?= $session->created_at ?><br>
         Expires on: <?= $session->expires_at ?><br>
-        <?php if ($session->session == session_id()): ?>
+        <?php if ($session->session == $_COOKIE[SESSION_COOKIE_NAME]): ?>
             <b>Current session</b>
         <?php else: ?>
             <a href="/revoke_session?session=<?= $session->session ?>">Revoke session</a>

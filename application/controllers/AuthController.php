@@ -29,7 +29,7 @@ class AuthController {
     }
 
     public static function signout () {
-        Auth::revokeSession(session_id());
+        Auth::revokeSession($_COOKIE[SESSION_COOKIE_NAME]);
         Router::redirect('/');
     }
 }

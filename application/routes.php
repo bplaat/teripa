@@ -22,7 +22,6 @@ if (Auth::check()) {
 
     if (Auth::player()->role == ROLE_ADMIN) {
         Router::route('/admin', 'AdminController::index');
-        Router::route('/admin/migrate', 'AdminController::migrate');
 
         Router::route('/admin/players', 'AdminPlayersController::index');
         Router::route('/admin/players/(.*)/edit', 'AdminPlayersController::edit');
