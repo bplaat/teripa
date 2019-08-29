@@ -38,6 +38,20 @@ class AdminUnitsController {
             if (isset($_FILES['image'])) {
                 move_uploaded_file($_FILES["image"]["tmp_name"], ROOT . '/public/images/units/' . $id . '.jpg');
             }
+
+            $players = Players::select()->fetchAll();
+            foreach ($players as $player) {
+                $attack = 0;
+                $defence = 0;
+                $player_units = PlayerUnits::select([ 'player_id' => $player->id ])->fetchAll();
+                foreach ($player_units as $player_unit) {
+                    $unit = Units::select($player_unit->unit_id)->fetch();
+                    $attack += $unit->attack * $player_unit->amount;
+                    $defence += $unit->defence * $player_unit->amount;
+                }
+                Players::update($player->id, [ 'attack' => $attack, 'defence' => $defence ]);
+            }
+
             Router::redirect('/admin/units');
         } else {
             $unit_groups = UnitGroups::select()->fetchAll();

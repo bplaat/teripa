@@ -38,6 +38,20 @@ class AdminBuildingsController {
             if (isset($_FILES['image'])) {
                 move_uploaded_file($_FILES["image"]["tmp_name"], ROOT . '/public/images/buildings/' . $id . '.jpg');
             }
+
+            $players = Players::select()->fetchAll();
+            foreach ($players as $player) {
+                $income = 0;
+                $defence = 0;
+                $player_buildings = PlayerBuildings::select([ 'player_id' => $player->id ])->fetchAll();
+                foreach ($player_buildings as $player_building) {
+                    $building = Buildings::select($player_building->building_id)->fetch();
+                    $income += $building->income * $player_building->amount;
+                    $defence += $building->defence * $player_building->amount;
+                }
+                Players::update($player->id, [ 'income' => $income, 'defence' => $defence ]);
+            }
+
             Router::redirect('/admin/buildings');
         } else {
             $building_groups = BuildingGroups::select()->fetchAll();

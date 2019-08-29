@@ -23,6 +23,8 @@ class Buildings extends Model {
         static::insert([ 'building_group_id' => 2, 'name' => 'Land Minefield', 'price' => 400000, 'income' => 0, 'defence' => 160 ]);
         static::insert([ 'building_group_id' => 2, 'name' => 'Nuclear Bomb Bunker', 'price' => 1600000, 'income' => 0, 'defence' => 320 ]);
 
+        static::insert([ 'building_group_id' => 1, 'name' => 'Mega Bomb', 'price' => 1000, 'income' => 1, 'defence' => 3 ]);
+
         return $query;
     }
 }

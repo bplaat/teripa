@@ -14,17 +14,15 @@
             </td>
             <td>
                 <h3><?= $building->name ?></h3>
-                <p>
-                    <?php if ($building->income > 0): ?>
-                        Income: <span class="money">$ <?= number_format($building->income) ?> / s</span>
-                    <?php endif ?>
-                    <?php if ($building->defence > 0): ?>
-                        Defence: <span class="defence"><?= number_format($building->defence) ?></span>
-                    <?php endif ?>
-                </p>
+                <?php if ($building->income > 0): ?>
+                    <p>Income: <span class="money">$ <?= number_format($building->income) ?> / s</span></p>
+                <?php endif ?>
+                <?php if ($building->defence > 0): ?>
+                    <p>Defence: <span class="defence"><?= number_format($building->defence) ?></span></p>
+                <?php endif ?>
             </td>
             <td>Price: <span class="money">$ <?= number_format($building->price) ?></span></td>
-            <td><?= $building->amount ?></td>
+            <td><?= number_format($building->amount) ?></td>
             <td>
                 <form method="post">
                     <input type="hidden" name="id" value="<?= $building->id ?>">

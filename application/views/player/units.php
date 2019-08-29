@@ -14,10 +14,11 @@
             </td>
             <td>
                 <h3><?= $unit->name ?></h3>
-                <p>Attack: <span class="attack"><?= number_format($unit->attack) ?></span> - Defence: <span class="defence"><?= number_format($unit->defence) ?></span></p>
+                <p>Attack: <span class="attack"><?= number_format($unit->attack) ?></span></p>
+                <p>Defence: <span class="defence"><?= number_format($unit->defence) ?></span></p>
             </td>
             <td>Price: <span class="money">$ <?= number_format($unit->price) ?></span>
-            <td><?= $unit->amount ?></td>
+            <td><?= number_format($unit->amount) ?></td>
             <td>
                 <form method="post">
                     <input type="hidden" name="id" value="<?= $unit->id ?>">

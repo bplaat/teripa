@@ -75,6 +75,8 @@ tr{border:1px solid #fff}
 th,td{padding:8px}
 th{text-align:left;background-color:#111}
 
+td > h3, td > p {margin: 4px 0;}
+
 .money,.attack,.defence{font-weight:bold}
 .money{color:#0f0}
 .attack{color:#f00}
