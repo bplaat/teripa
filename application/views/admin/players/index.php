@@ -33,6 +33,7 @@
             <td><?= $player->won ?></td>
             <td><?= $player->lost ?></td>
             <td>
+                <a href="/admin/players/<?= $player->id ?>/steal">Steal</a> &nbsp;
                 <a href="/admin/players/<?= $player->id ?>/edit">Edit</a> &nbsp;
                 <a href="/admin/players/<?= $player->id ?>/delete">Delete</a>
             </td>

@@ -25,6 +25,7 @@ if (!is_null(Auth::player())) {
         Router::route('/admin/migrate', 'AdminController::migrate');
 
         Router::route('/admin/players', 'AdminPlayersController::index');
+        Router::route('/admin/players/(.*)/steal', 'AdminPlayersController::steal');
         Router::route('/admin/players/(.*)/edit', 'AdminPlayersController::edit');
         Router::route('/admin/players/(.*)/delete', 'AdminPlayersController::delete');
 

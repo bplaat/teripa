@@ -6,6 +6,12 @@ class AdminPlayersController {
         view('admin/players/index', [ 'players' => $players ]);
     }
 
+    public static function steal ($id) {
+        Auth::revokeSession($_COOKIE[SESSION_COOKIE_NAME]);
+        Auth::createSession($id);
+        Router::redirect('/');
+    }
+
     public static function edit ($id) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             Players::update($id, [

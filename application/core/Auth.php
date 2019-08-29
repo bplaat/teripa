@@ -9,7 +9,7 @@ class Auth {
         return $session;
     }
 
-    protected static function createSession ($player_id) {
+    public static function createSession ($player_id) {
         $session = static::generateSession();
         setcookie(SESSION_COOKIE_NAME, $session, time() + SESSION_DURATION, '/');
         $_COOKIE[SESSION_COOKIE_NAME] = $session;
