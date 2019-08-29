@@ -11,5 +11,5 @@ define('SESSION_DURATION', 60 * 60 * 24 * 356);
 define('ROLE_NORMAL', 0);
 define('ROLE_ADMIN', 1);
 
-define('PLAYER_START_MONEY', 2500000);
-define('BATTLE_BOUNTY_FACTOR', 15);
+define('PLAYER_START_MONEY', 25000);
+define('BATTLE_BOUNTY_FACTOR', 20);

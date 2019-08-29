@@ -7,6 +7,7 @@
     <tr>
         <th>#</th>
         <th>Group</th>
+        <th>Position</th>
         <th>Name</th>
         <th>Price</th>
         <th>Income</th>
@@ -18,6 +19,7 @@
         <tr>
             <td><?= $building->id ?></td>
             <td><?= findById($building_groups, $building->building_group_id)->name ?></td>
+            <td><?= $building->position ?></td>
             <td><?= $building->name ?></td>
             <td><span class="money">$ <?= number_format($building->price) ?></span></td>
             <td><span class="money">$ <?= number_format($building->income) ?> / s</span></td>

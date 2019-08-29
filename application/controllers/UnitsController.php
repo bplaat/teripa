@@ -81,7 +81,7 @@ class UnitsController {
                 }
             }
 
-            $units = Units::select([ 'unit_group_id' => $unit_group_id ])->fetchAll();
+            $units = Database::query('SELECT * FROM `units` WHERE `unit_group_id` = ? ORDER BY `position`', [ $unit_group_id ])->fetchAll();
             foreach ($units as $unit) {
                 $player_units_query = PlayerUnits::select([ 'player_id' => Auth::player()->id, 'unit_id' => $unit->id ]);
                 if ($player_units_query->rowCount() == 1) {

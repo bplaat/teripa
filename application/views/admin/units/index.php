@@ -7,6 +7,7 @@
     <tr>
         <th>#</th>
         <th>Group</th>
+        <th>Position</th>
         <th>Name</th>
         <th>Price</th>
         <th>Attack</th>
@@ -18,6 +19,7 @@
         <tr>
             <td><?= $unit->id ?></td>
             <td><?= findById($unit_groups, $unit->unit_group_id)->name ?></td>
+            <td><?= $unit->position ?></td>
             <td><?= $unit->name ?></td>
             <td><span class="money">$ <?= number_format($unit->price) ?></span></td>
             <td><span class="attack"><?= number_format($unit->attack) ?></span></td>

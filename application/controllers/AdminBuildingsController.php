@@ -11,13 +11,14 @@ class AdminBuildingsController {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             Buildings::insert([
                 'building_group_id' => $_POST['building_group_id'],
+                'position' => $_POST['position'],
                 'name' => $_POST['name'],
                 'price' => $_POST['price'],
                 'income' => $_POST['income'],
                 'defence' => $_POST['defence']
             ]);
             if (isset($_FILES['image'])) {
-                move_uploaded_file($_FILES["image"]["tmp_name"], ROOT . '/public/images/buildings/' . Database::lastInsertId() . '.jpg');
+                move_uploaded_file($_FILES['image']['tmp_name'], ROOT . '/public/images/buildings/' . $_POST['position'] . '.jpg');
             }
             Router::redirect('/admin/buildings');
         } else {
@@ -28,15 +29,17 @@ class AdminBuildingsController {
 
     public static function edit ($id) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $building = Buildings::select($id)->fetch();
             Buildings::update($id, [
                 'building_group_id' => $_POST['building_group_id'],
+                'position' => $_POST['position'],
                 'name' => $_POST['name'],
                 'price' => $_POST['price'],
                 'income' => $_POST['income'],
                 'defence' => $_POST['defence']
             ]);
             if (isset($_FILES['image'])) {
-                move_uploaded_file($_FILES["image"]["tmp_name"], ROOT . '/public/images/buildings/' . $id . '.jpg');
+                move_uploaded_file($_FILES['image']['tmp_name'], ROOT . '/public/images/buildings/' . slug(findById($building_groups, $building_group_id)->name) . '/' . $building->position . '.jpg');
             }
 
             $players = Players::select()->fetchAll();

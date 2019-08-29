@@ -2,7 +2,7 @@
 
 <?php view('admin/navbar') ?>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <h2>Create a building</h2>
     <div>
         <label for="image">Image:</label>
@@ -15,6 +15,10 @@
                 <option value="<?= $building_group->id ?>"><?= $building_group->name ?></option>
             <?php endforeach ?>
         </select>
+    </div>
+    <div>
+        <label for="position">Position:</label>
+        <input type="number" id="position" name="position" required>
     </div>
     <div>
         <label for="name">Name:</label>

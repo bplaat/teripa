@@ -6,7 +6,7 @@
     <h2>Edit a building</h2>
     <div>
         <label for="image">Image:</label>
-        <img src="/images/buildings/<?= $building->id ?>.jpg">
+        <img src="/images/buildings/<?= slug(findById($building_groups, $building->building_group_id)->name) ?>/<?= $building->position ?>.jpg">
         <input type="file" id="image" name="image">
     </div>
     <div>
@@ -16,6 +16,10 @@
                 <option value="<?= $building_group->id ?>" <?= $building_group->id == $building->building_group_id ? ' selected' : '' ?>><?= $building_group->name ?></option>
             <?php endforeach ?>
         </select>
+    </div>
+    <div>
+        <label for="position">Position:</label>
+        <input type="number" id="position" name="position" value="<?= $building->position ?>" required>
     </div>
     <div>
         <label for="name">Name:</label>

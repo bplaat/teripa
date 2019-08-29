@@ -12,6 +12,6 @@ class AdminController {
             call_user_func($classname . '::create');
         }
         Auth::signup('Bastiaan', 'van der Plaat', 'bplaat', 'bastiaan.v.d.plaat@gmail.com', 'gouda', true);
-        Router::back();
+        Router::redirect('/');
     }
 }

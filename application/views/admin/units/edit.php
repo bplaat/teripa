@@ -2,11 +2,11 @@
 
 <?php view('admin/navbar') ?>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <h2>Edit a unit</h2>
     <div>
         <label for="image">Image:</label>
-        <img src="/images/units/<?= $unit->id ?>.jpg">
+        <img src="/images/units/<?= slug(findById($unit_groups, $unit->unit_group_id)->name) ?>/<?= $unit->position ?>.jpg">
         <input type="file" id="image" name="image">
     </div>
     <div>
@@ -16,6 +16,10 @@
                 <option value="<?= $unit_group->id ?>" <?= $unit_group->id == $unit->unit_group_id ? ' selected' : '' ?>><?= $unit_group->name ?></option>
             <?php endforeach ?>
         </select>
+    </div>
+    <div>
+        <label for="position">Position:</label>
+        <input type="number" id="position" name="position" value="<?= $unit->position ?>" required>
     </div>
     <div>
         <label for="name">Name:</label>

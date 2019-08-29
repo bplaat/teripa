@@ -10,7 +10,7 @@
     <?php foreach ($units as $unit): ?>
         <tr>
             <td style="width: 0;">
-                <img width="150" src="/images/units/<?= $unit->id ?>.jpg">
+                <img width="150" src="/images/units/<?= slug(findById($unit_groups, $unit_group_id)->name) ?>/<?= $unit->position ?>.jpg">
             </td>
             <td>
                 <h3><?= $unit->name ?></h3>

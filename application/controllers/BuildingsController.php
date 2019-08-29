@@ -81,7 +81,7 @@ class BuildingsController {
                 }
             }
 
-            $buildings = Buildings::select([ 'building_group_id' => $building_group_id ])->fetchAll();
+            $buildings = Database::query('SELECT * FROM `buildings` WHERE `building_group_id` = ? ORDER BY `position`', [ $building_group_id ])->fetchAll();
             foreach ($buildings as $building) {
                 $player_buildings_query = PlayerBuildings::select([ 'player_id' => Auth::player()->id, 'building_id' => $building->id ]);
                 if ($player_buildings_query->rowCount() == 1) {

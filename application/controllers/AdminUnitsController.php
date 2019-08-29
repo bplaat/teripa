@@ -11,13 +11,14 @@ class AdminUnitsController {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             Units::insert([
                 'unit_group_id' => $_POST['unit_group_id'],
+                'position' => $_POST['position'],
                 'name' => $_POST['name'],
                 'price' => $_POST['price'],
                 'attack' => $_POST['attack'],
                 'defence' => $_POST['defence']
             ]);
             if (isset($_FILES['image'])) {
-                move_uploaded_file($_FILES["image"]["tmp_name"], ROOT . '/public/images/units/' . Database::lastInsertId() . '.jpg');
+                move_uploaded_file($_FILES['image']['tmp_name'], ROOT . '/public/images/units/' . $_POST['position'] . '.jpg');
             }
             Router::redirect('/admin/units');
         } else {
@@ -28,15 +29,17 @@ class AdminUnitsController {
 
     public static function edit ($id) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $unit = Units::select($id)->fetch();
             Units::update($id, [
                 'unit_group_id' => $_POST['unit_group_id'],
+                'position' => $_POST['position'],
                 'name' => $_POST['name'],
                 'price' => $_POST['price'],
                 'attack' => $_POST['attack'],
                 'defence' => $_POST['defence']
             ]);
             if (isset($_FILES['image'])) {
-                move_uploaded_file($_FILES["image"]["tmp_name"], ROOT . '/public/images/units/' . $id . '.jpg');
+                move_uploaded_file($_FILES['image']['tmp_name'], ROOT . '/public/images/units/' . slug(findById($unit_groups, $unit_group_id)->name) . '/' . $unit->position . '.jpg');
             }
 
             $players = Players::select()->fetchAll();

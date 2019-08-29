@@ -27,9 +27,9 @@
                 <div style="flex-direction: column;">
                     <div><?= Auth::player()->first_name ?> <?= Auth::player()->last_name ?></div>
                     <div>
-                        <a <?= Router::path() == '/settings' ? 'class="active"' : '' ?> href="/settings">Settings</a>
+                        <a <?= Router::path() == '/settings' ? 'class="active"' : '' ?> href="/settings">Settings</a> &nbsp;
                         <?php if (Auth::player()->role == ROLE_ADMIN): ?>
-                            <a <?= startsWith(Router::path(), '/admin') ? 'class="active"' : '' ?> href="/admin">Admin</a>
+                            <a <?= startsWith(Router::path(), '/admin') ? 'class="active"' : '' ?> href="/admin">Admin</a> &nbsp;
                         <?php endif ?>
                        <a href="/signout">Sign out</a>
                     </div>
