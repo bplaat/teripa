@@ -13,7 +13,7 @@
         <label for="unit_group_id">Unit group:</label>
         <select id="unit_group_id" name="unit_group_id" autofocus required>
             <?php foreach ($unit_groups as $unit_group): ?>
-                <option value="<?= $unit_group->id ?>" <?= $unit_group->id == $unit->unit_group_id ? ' selected' : '' ?>><?= $unit_group->name ?></option>
+                <option value="<?= $unit_group->id ?>"<?= $unit_group->id == $unit->unit_group_id ? ' selected' : '' ?>><?= $unit_group->name ?></option>
             <?php endforeach ?>
         </select>
     </div>

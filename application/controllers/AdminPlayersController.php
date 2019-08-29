@@ -13,6 +13,8 @@ class AdminPlayersController {
                 'last_name' => $_POST['last_name'],
                 'username' => $_POST['username'],
                 'email' => $_POST['email'],
+                'role' => $_POST['role'],
+                'background' => $_POST['background'],
                 'money' => $_POST['money']
             ]);
             Router::redirect('/admin/players');

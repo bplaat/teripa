@@ -10,6 +10,7 @@ class Players extends Model {
             `email` VARCHAR(255) UNIQUE NOT NULL,
             `password` VARCHAR(255) NOT NULL,
             `role` TINYINT UNSIGNED NOT NULL,
+            `background` TINYINT UNSIGNED NOT NULL DEFAULT 1,
             `money` BIGINT UNSIGNED NOT NULL,
             `income` BIGINT UNSIGNED NOT NULL,
             `attack` BIGINT UNSIGNED NOT NULL,

@@ -25,6 +25,16 @@
         <input type="email" id="email" name="email" value="<?= Auth::player()->email ?>" required>
     </div>
     <div>
+        <label for="background">Background:</label>
+        <select id="background" name="background" required>
+            <option value="1"<?= Auth::player()->background == 1 ? ' selected' : '' ?>>Army</option>
+            <option value="2"<?= Auth::player()->background == 2 ? ' selected' : '' ?>>Pirates</option>
+            <option value="3"<?= Auth::player()->background == 3 ? ' selected' : '' ?>>Classical</option>
+            <option value="4"<?= Auth::player()->background == 4 ? ' selected' : '' ?>>Snow</option>
+            <option value="5"<?= Auth::player()->background == 5 ? ' selected' : '' ?>>Stars</option>
+        </select>
+    </div>
+    <div>
         <button type="submit">Change details</button>
     </div>
 </form>

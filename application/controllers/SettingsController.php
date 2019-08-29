@@ -21,7 +21,8 @@ class SettingsController {
                     'first_name' => $_POST['first_name'],
                     'last_name' => $_POST['last_name'],
                     'username' => $_POST['username'],
-                    'email' => $_POST['email']
+                    'email' => $_POST['email'],
+                    'background' => $_POST['background']
                 ]);
                 Router::redirect('/settings');
             }

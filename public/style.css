@@ -70,10 +70,10 @@ a.active {
     font-weight: bold;
 }
 
-table{width:100%;border-collapse:collapse}
+table{width:100%;border-collapse:collapse;background-color:rgba(0,0,0,0.6)}
 tr{border:1px solid #fff}
 th,td{padding:8px}
-th{text-align:left;background-color:#111}
+th{text-align:left;background-color:rgba(0,0,0,0.5)}
 
 td > h3, td > p {margin: 4px 0;}
 

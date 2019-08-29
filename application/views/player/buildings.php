@@ -37,7 +37,7 @@
                         <option value="200">200</option>
                         <option value="500">500</option>
                         <?php if (Auth::player()->money >= $building->price): ?>
-                            <option value="<?= floor(Auth::player()->money / $building->price) ?>"><?= floor(Auth::player()->money / $building->price) ?></option>
+                            <option value="<?= floor(Auth::player()->money / $building->price) ?>" selected><?= floor(Auth::player()->money / $building->price) ?></option>
                         <?php endif ?>
                     </select>
                     <button class="inline" type="submit" name="action" value="buy">Buy</button>
@@ -57,7 +57,7 @@
                         <option value="200">200</option>
                         <option value="500">500</option>
                         <?php if ($building->amount > 0): ?>
-                            <option value="<?= $building->amount ?>"><?= $building->amount ?></option>
+                            <option value="<?= $building->amount ?>" selected><?= $building->amount ?></option>
                         <?php endif ?>
                     </select>
                     <button class="inline" type="submit" name="action" value="sell">Sell</button>

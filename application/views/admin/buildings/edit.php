@@ -13,7 +13,7 @@
         <label for="building_group_id">Building group:</label>
         <select id="building_group_id" name="building_group_id" autofocus required>
             <?php foreach ($building_groups as $building_group): ?>
-                <option value="<?= $building_group->id ?>" <?= $building_group->id == $building->building_group_id ? ' selected' : '' ?>><?= $building_group->name ?></option>
+                <option value="<?= $building_group->id ?>"<?= $building_group->id == $building->building_group_id ? ' selected' : '' ?>><?= $building_group->name ?></option>
             <?php endforeach ?>
         </select>
     </div>

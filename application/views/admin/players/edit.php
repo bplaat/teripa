@@ -23,6 +23,23 @@
         <input type="email" id="email" name="email" value="<?= $player->email ?>" required>
     </div>
     <div>
+        <label for="role">Role:</label>
+        <select id="role" name="role" required>
+            <option value="<?= ROLE_NORMAL ?>"<?= $player->role == ROLE_NORMAL ? ' selected' : '' ?>>Normal</option>
+            <option value="<?= ROLE_ADMIN ?>"<?= $player->role == ROLE_ADMIN ? ' selected' : '' ?>>Admin</option>
+        </select>
+    </div>
+    <div>
+        <label for="background">Background:</label>
+        <select id="background" name="background" required>
+            <option value="1"<?= $player->background == 1 ? ' selected' : '' ?>>Army</option>
+            <option value="2"<?= $player->background == 2 ? ' selected' : '' ?>>Pirates</option>
+            <option value="3"<?= $player->background == 3 ? ' selected' : '' ?>>Classical</option>
+            <option value="4"<?= $player->background == 4 ? ' selected' : '' ?>>Snow</option>
+            <option value="5"<?= $player->background == 5 ? ' selected' : '' ?>>Stars</option>
+        </select>
+    </div>
+    <div>
         <label for="money">Money:</label>
         <input type="number" id="money" name="money" value="<?= $player->money ?>" required>
     </div>

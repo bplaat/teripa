@@ -1,3 +1,8 @@
+    <style>
+        body {
+            background-image: url(/images/backgrounds/<?= is_null(Auth::player()) ? 1 : Auth::player()->background ?>.jpg);
+        }
+    </style>
     <?php if (!is_null(Auth::player())): ?>
         <script>
             var moneyTimer = document.getElementById('money_timer');
