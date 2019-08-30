@@ -22,7 +22,7 @@
             <td>
                 <form method="post">
                     <input type="hidden" name="id" value="<?= $unit->id ?>">
-                    <select class="small" name="amount">
+                    <select class="small" name="amount" autocomplete="off">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="5">5</option>
@@ -33,7 +33,7 @@
                         <option value="200">200</option>
                         <option value="500">500</option>
                         <?php if (Auth::player()->money >= $unit->price): ?>
-                            <option value="<?= floor(Auth::player()->money / $unit->price) ?>" selected><?= floor(Auth::player()->money / $unit->price) ?></option>
+                            <option value="<?= floor(Auth::player()->money / $unit->price) ?>" selected><?= number_format(floor(Auth::player()->money / $unit->price)) ?></option>
                         <?php endif ?>
                     </select>
                     <button class="inline" type="submit" name="action" value="buy">Buy</button>
@@ -42,7 +42,7 @@
             <td>
                 <form method="post">
                     <input type="hidden" name="id" value="<?= $unit->id ?>">
-                    <select class="small" name="amount">
+                    <select class="small" name="amount" autocomplete="off">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="5">5</option>
@@ -53,7 +53,7 @@
                         <option value="200">200</option>
                         <option value="500">500</option>
                         <?php if ($unit->amount > 0): ?>
-                            <option value="<?= $unit->amount ?>" selected><?= $unit->amount ?></option>
+                            <option value="<?= $unit->amount ?>" selected><?= number_format($unit->amount) ?></option>
                         <?php endif ?>
                     </select>
                     <button class="inline" type="submit" name="action" value="sell">Sell</button>

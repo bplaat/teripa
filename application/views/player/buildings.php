@@ -26,7 +26,7 @@
             <td>
                 <form method="post">
                     <input type="hidden" name="id" value="<?= $building->id ?>">
-                    <select class="small" name="amount">
+                    <select class="small" name="amount" autocomplete="off">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="5">5</option>
@@ -37,7 +37,7 @@
                         <option value="200">200</option>
                         <option value="500">500</option>
                         <?php if (Auth::player()->money >= $building->price): ?>
-                            <option value="<?= floor(Auth::player()->money / $building->price) ?>" selected><?= floor(Auth::player()->money / $building->price) ?></option>
+                            <option value="<?= floor(Auth::player()->money / $building->price) ?>" selected><?= number_format(floor(Auth::player()->money / $building->price)) ?></option>
                         <?php endif ?>
                     </select>
                     <button class="inline" type="submit" name="action" value="buy">Buy</button>
@@ -46,7 +46,7 @@
             <td>
                 <form method="post">
                     <input type="hidden" name="id" value="<?= $building->id ?>">
-                    <select class="small" name="amount">
+                    <select class="small" name="amount" autocomplete="off">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="5">5</option>
@@ -57,7 +57,7 @@
                         <option value="200">200</option>
                         <option value="500">500</option>
                         <?php if ($building->amount > 0): ?>
-                            <option value="<?= $building->amount ?>" selected><?= $building->amount ?></option>
+                            <option value="<?= $building->amount ?>" selected><?= number_format($building->amount) ?></option>
                         <?php endif ?>
                     </select>
                     <button class="inline" type="submit" name="action" value="sell">Sell</button>

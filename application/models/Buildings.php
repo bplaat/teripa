@@ -21,7 +21,7 @@ class Buildings extends Model {
         static::insert([ 'building_group_id' => 1, 'position' => 7, 'name' => 'Military Research Lab', 'price' => 2000000, 'income' => 160, 'defence' => 0 ]);
         static::insert([ 'building_group_id' => 1, 'position' => 8, 'name' => 'Nuclear Testing Facility', 'price' => 4000000, 'income' => 300, 'defence' => 0 ]);
         static::insert([ 'building_group_id' => 1, 'position' => 9, 'name' => 'Water Treatment Facility', 'price' => 10000000, 'income' => 500, 'defence' => 0 ]);
-        static::insert([ 'building_group_id' => 1, 'position' => 10, 'name' => 'Solar Satellite Network', 'price' => 1200000, 'income' => 1250, 'defence' => 0 ]);
+        static::insert([ 'building_group_id' => 1, 'position' => 10, 'name' => 'Solar Satellite Network', 'price' => 12000000, 'income' => 1250, 'defence' => 0 ]);
         static::insert([ 'building_group_id' => 1, 'position' => 11, 'name' => 'Chip Laboratory', 'price' => 14000000, 'income' => 2500, 'defence' => 0 ]);
 
         static::insert([ 'building_group_id' => 2, 'position' => 1, 'name' => 'Bunker', 'price' => 1000, 'income' => 0, 'defence' => 10 ]);
