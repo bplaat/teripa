@@ -10,6 +10,8 @@
         <th>Last name</th>
         <th>Username</th>
         <th>Email</th>
+        <th>Role</th>
+        <th>Back- ground</th>
         <th>Money</th>
         <th>Income</th>
         <th>Attack</th>
@@ -25,7 +27,9 @@
             <td><?= $player->first_name ?></td>
             <td><?= $player->last_name ?></td>
             <td><?= $player->username ?></td>
-            <td><?= cut($player->email, 15) ?></td>
+            <td><?= cut($player->email, 10) ?></td>
+            <td><?= ['Normal', 'Admin'][$player->role] ?></td>
+            <td><?= ['Army', 'Pirates', 'Classical', 'Snow', 'Stars'][$player->background - 1] ?></td>
             <td><span class="money">$ <?= number_format($player->money) ?></span></td>
             <td><span class="money">$ <?= number_format($player->income) ?> / s</span></td>
             <td><span class="attack"><?= number_format($player->attack) ?></span></td>
