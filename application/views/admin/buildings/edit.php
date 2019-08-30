@@ -5,9 +5,9 @@
 <form method="post" enctype="multipart/form-data">
     <h2>Edit a building</h2>
     <div>
-        <label for="image">Image:</label>
+        <label for="image">Image (JPEG):</label>
         <img src="/images/buildings/<?= slug(findById($building_groups, $building->building_group_id)->name) ?>/<?= $building->position ?>.jpg">
-        <input type="file" id="image" name="image">
+        <input type="file" id="image" name="image" accept="image/jpeg">
     </div>
     <div>
         <label for="building_group_id">Building group:</label>

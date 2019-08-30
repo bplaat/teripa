@@ -7,5 +7,5 @@
     <a <?= startsWith(Router::path(), '/admin/unit_groups') ? 'class="active"' : '' ?> href="/admin/unit_groups">Unit Groups</a> &nbsp;
     <a <?= startsWith(Router::path(), '/admin/units') ? 'class="active"' : '' ?> href="/admin/units">Units</a>
 
-    <a style="float: right;" href="/admin/migrate">Migrate</a>
+    <a class="right" href="/admin/migrate">Migrate</a>
 </p>

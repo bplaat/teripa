@@ -7,7 +7,7 @@ body, input, select, button {
 body {
     background-color: #000;
     color: #fff;
-    max-width: 65em;
+    max-width: 1050px;
     margin: 16px auto;
 }
 
@@ -15,6 +15,12 @@ body {
     width: 48px;
     height: 48px;
     border-radius: 4px;
+    float: left;
+    margin-right: 8px;
+}
+
+.right {
+    float: right;
 }
 
 label, input, select, button {
@@ -28,7 +34,7 @@ label {
 
 input, select {
     border: 1px solid #777;
-    background-color: #111;
+    background-color: rgba(0, 0, 0, 0.6);
     color: #fff;
     box-sizing: border-box;
     padding: 12px 16px;
@@ -36,8 +42,8 @@ input, select {
 }
 
 button {
-    border: 1px solid #bbb;
-    background-color: #333;
+    border: 1px solid #999;
+    background-color: rgba(0, 0, 0, 0.6);
     color: #fff;
     padding: 8px 16px;
     cursor: pointer;
@@ -70,14 +76,37 @@ a.active {
     font-weight: bold;
 }
 
-table{width:100%;border-collapse:collapse;background-color:rgba(0,0,0,0.6)}
-tr{border:1px solid #fff}
-th,td{padding:8px}
-th{text-align:left;background-color:rgba(0,0,0,0.5)}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+tr {
+    border: 1px solid #fff;
+}
+th, td {
+    padding: 8px;
+}
+th {
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
-td > h3, td > p {margin: 4px 0;}
+td > h3, td > p {
+    margin: 4px 0;
+}
 
-.money,.attack,.defence{font-weight:bold}
-.money{color:#0f0}
-.attack{color:#f00}
-.defence{color:#00f}
+.money {
+    font-weight:bold;
+    color: #0f0;
+}
+
+.attack {
+    font-weight: bold;
+    color: #f00;
+}
+
+.defence {
+    font-weight: bold;
+    color: #00f;
+}

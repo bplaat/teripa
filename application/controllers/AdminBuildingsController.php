@@ -32,6 +32,7 @@ class AdminBuildingsController {
     public static function edit ($id) {
         $building_groups = BuildingGroups::select()->fetchAll();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $old_position = Buildings::select($id)->fetch()->position;
             Buildings::update($id, [
                 'building_group_id' => $_POST['building_group_id'],
                 'position' => $_POST['position'],
@@ -40,8 +41,17 @@ class AdminBuildingsController {
                 'income' => $_POST['income'],
                 'defence' => $_POST['defence']
             ]);
+
+            $building_group_slug = slug(findById($building_groups, $_POST['building_group_id'])->name);
+            if (is_file(ROOT . '/public/images/buildings/' . $building_group_slug . '/' . $old_position . '.jpg') && $old_position != $_POST['position']) {
+                rename(
+                    ROOT . '/public/images/buildings/' . $building_group_slug . '/' . $old_position . '.jpg',
+                    ROOT . '/public/images/buildings/' . $building_group_slug . '/' . $_POST['position'] . '.jpg'
+                );
+            }
+
             if (isset($_FILES['image'])) {
-                $folder = ROOT . '/public/images/buildings/' . slug(findById($building_groups, $_POST['building_group_id'])->name);
+                $folder = ROOT . '/public/images/buildings/' . $building_group_slug;
                 if (!is_dir($folder)) mkdir($folder);
                 move_uploaded_file($_FILES['image']['tmp_name'],  $folder . '/' . $_POST['position'] . '.jpg');
             }
@@ -67,6 +77,11 @@ class AdminBuildingsController {
     }
 
     public static function delete ($id) {
+        $building = Buildings::select($id)->fetch();
+        $building_group_slug = slug(BuildingGroups::select($building->building_group_id)->fetch()->name);
+        if (is_file(ROOT . '/public/images/buildings/' . $building_group_slug . '/' . $building->position . '.jpg')) {
+            unlink(ROOT . '/public/images/buildings/' . $building_group_slug . '/' . $building->position . '.jpg');
+        }
         Buildings::delete($id);
         Router::back();
     }

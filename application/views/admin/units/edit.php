@@ -5,9 +5,9 @@
 <form method="post" enctype="multipart/form-data">
     <h2>Edit a unit</h2>
     <div>
-        <label for="image">Image:</label>
+        <label for="image">Image (JPEG):</label>
         <img src="/images/units/<?= slug(findById($unit_groups, $unit->unit_group_id)->name) ?>/<?= $unit->position ?>.jpg">
-        <input type="file" id="image" name="image">
+        <input type="file" id="image" name="image" accept="image/jpeg">
     </div>
     <div>
         <label for="unit_group_id">Unit group:</label>

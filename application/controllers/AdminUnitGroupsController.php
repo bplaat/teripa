@@ -23,8 +23,11 @@ class AdminUnitGroupsController {
             UnitGroups::update($id, [
                 'name' => $_POST['name']
             ]);
-            if (is_dir(ROOT . '/public/images/units/' . slug($old_name))) {
-                rename(ROOT . '/public/images/units/' . slug($old_name), ROOT . '/public/images/units/' . slug($_POST['name']));
+            if (is_dir(ROOT . '/public/images/units/' . slug($old_name)) && $old_name != $_POST['name']) {
+                rename(
+                    ROOT . '/public/images/units/' . slug($old_name),
+                    ROOT . '/public/images/units/' . slug($_POST['name'])
+                );
             }
             Router::redirect('/admin/unit_groups');
         } else {

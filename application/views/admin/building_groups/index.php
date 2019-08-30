@@ -13,7 +13,7 @@
     <?php foreach ($building_groups as $building_group): ?>
         <tr>
             <td><?= $building_group->id ?></td>
-            <td style="width: 800px;"><a href="/buildings/<?= slug($building_group->name) ?>"><?= $building_group->name ?></a></td>
+            <td style="width: 850px;"><a href="/buildings/<?= slug($building_group->name) ?>"><?= $building_group->name ?></a></td>
             <td>
                 <a href="/admin/building_groups/<?= $building_group->id ?>/edit">Edit</a> &nbsp;
                 <a href="/admin/building_groups/<?= $building_group->id ?>/delete">Delete</a>

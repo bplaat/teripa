@@ -23,8 +23,8 @@
         </td>
         <td style="width: 275px; border-left: 1px solid #fff">
             <?php if (!is_null(Auth::player())): ?>
-                <img class="avatar" style="float: left; margin-right: 16px;" src="https://www.gravatar.com/avatar/<?= md5(Auth::player()->email) ?>?s=48">
-                <div style="flex-direction: column;">
+                <img class="avatar" src="https://www.gravatar.com/avatar/<?= md5(Auth::player()->email) ?>?s=48">
+                <div>
                     <div><?= Auth::player()->first_name ?> <?= Auth::player()->last_name ?></div>
                     <div>
                         <a <?= Router::path() == '/settings' ? 'class="active"' : '' ?> href="/settings">Settings</a> &nbsp;

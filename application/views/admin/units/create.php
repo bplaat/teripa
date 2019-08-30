@@ -5,8 +5,8 @@
 <form method="post" enctype="multipart/form-data">
     <h2>Create a unit</h2>
     <div>
-        <label for="image">Image:</label>
-        <input type="file" id="image" name="image">
+        <label for="image">Image (JPEG):</label>
+        <input type="file" id="image" name="image" accept="image/jpeg">
     </div>
     <div>
         <label for="unit_group_id">Unit group:</label>

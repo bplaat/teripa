@@ -32,6 +32,7 @@ class AdminUnitsController {
     public static function edit ($id) {
         $unit_groups = UnitGroups::select()->fetchAll();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $old_position = Units::select($id)->fetch()->position;
             Units::update($id, [
                 'unit_group_id' => $_POST['unit_group_id'],
                 'position' => $_POST['position'],
@@ -40,8 +41,17 @@ class AdminUnitsController {
                 'attack' => $_POST['attack'],
                 'defence' => $_POST['defence']
             ]);
+
+            $unit_group_slug = slug(findById($unit_groups, $_POST['unit_group_id'])->name);
+            if (is_file(ROOT . '/public/images/units/' . $unit_group_slug . '/' . $old_position . '.jpg') && $old_position != $_POST['position']) {
+                rename(
+                    ROOT . '/public/images/units/' . $unit_group_slug . '/' . $old_position . '.jpg',
+                    ROOT . '/public/images/units/' . $unit_group_slug . '/' . $_POST['position'] . '.jpg'
+                );
+            }
+
             if (isset($_FILES['image'])) {
-                $folder = ROOT . '/public/images/units/' . slug(findById($unit_groups, $_POST['unit_group_id'])->name);
+                $folder = ROOT . '/public/images/units/' . $unit_group_slug;
                 if (!is_dir($folder)) mkdir($folder);
                 move_uploaded_file($_FILES['image']['tmp_name'],  $folder . '/' . $_POST['position'] . '.jpg');
             }
@@ -67,6 +77,11 @@ class AdminUnitsController {
     }
 
     public static function delete ($id) {
+        $unit = Units::select($id)->fetch();
+        $unit_group_slug = slug(UnitGroups::select($unit->unit_group_id)->fetch()->name);
+        if (is_file(ROOT . '/public/images/units/' . $unit_group_slug . '/' . $unit->position . '.jpg')) {
+            unlink(ROOT . '/public/images/units/' . $unit_group_slug . '/' . $unit->position . '.jpg');
+        }
         Units::delete($id);
         Router::back();
     }

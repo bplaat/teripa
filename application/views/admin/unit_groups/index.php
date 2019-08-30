@@ -13,7 +13,7 @@
     <?php foreach ($unit_groups as $unit_group): ?>
         <tr>
             <td><?= $unit_group->id ?></td>
-            <td style="width: 800px;"><a href="/units/<?= slug($unit_group->name) ?>"><?= $unit_group->name ?></a></td>
+            <td style="width: 850px;"><a href="/units/<?= slug($unit_group->name) ?>"><?= $unit_group->name ?></a></td>
             <td>
                 <a href="/admin/unit_groups/<?= $unit_group->id ?>/edit">Edit</a> &nbsp;
                 <a href="/admin/unit_groups/<?= $unit_group->id ?>/delete">Delete</a>

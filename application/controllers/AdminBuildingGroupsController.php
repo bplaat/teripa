@@ -23,8 +23,11 @@ class AdminBuildingGroupsController {
             BuildingGroups::update($id, [
                 'name' => $_POST['name']
             ]);
-            if (is_dir(ROOT . '/public/images/buildings/' . slug($old_name))) {
-                rename(ROOT . '/public/images/buildings/' . slug($old_name), ROOT . '/public/images/buildings/' . slug($_POST['name']));
+            if (is_dir(ROOT . '/public/images/buildings/' . slug($old_name)) && $old_name != $_POST['name']) {
+                rename(
+                    ROOT . '/public/images/buildings/' . slug($old_name),
+                    ROOT . '/public/images/buildings/' . slug($_POST['name'])
+                );
             }
             Router::redirect('/admin/building_groups');
         } else {
