@@ -1,3 +1,3 @@
-# Battle of Teripa II
+# Battle of Teripa
 
-The sequel of Battle of Teripa a new PHP online strategy game!
+The Battle of Teripa game you know and love remasterd with some new code!
