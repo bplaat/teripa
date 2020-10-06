@@ -36,7 +36,20 @@ class Router {
         ) {
             array_shift($values);
 
-            static::handleResponse($callback($values));
+            preg_match('/{(.*)}/U', $route, $names);
+            array_shift($names);
+            foreach ($names as $index => $name) {
+                if (class_exists($name)) {
+                    $query = ($name . '::select')($values[$index]);
+                    if ($query->rowCount() == 1) {
+                        $values[$index] = $query->fetch();
+                    } else {
+                        return;
+                    }
+                }
+            }
+
+            static::handleResponse($callback(...$values));
         }
     }
 

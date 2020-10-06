@@ -10,5 +10,5 @@ define('DATABASE_PASSWORD', 'teripa');
 
 define('SESSION_COOKIE_NAME', 'teripa_session');
 define('SESSION_DURATION', 60 * 60 * 24 * 356);
-define('SESSION_UPDATE_DURATION', 60);
+define('SESSION_UPDATE_DURATION', 60 * 5);
 define('SESSION_SHORT_COOKIE_NAME', 'teripa_short_session');

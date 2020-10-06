@@ -24,7 +24,7 @@ class Session {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['csrf_token'])) {
-            Flash::flash('errors', [
+            Session::flash('errors', [
                 'Your did not use the cross-site request forgery token'
             ]);
             Router::back();
@@ -34,7 +34,7 @@ class Session {
             if (hash_equals($_REQUEST['csrf_token'], $_SESSION['csrf_token'])) {
                 $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
             } else {
-                Flash::flash('errors', [
+                Session::flash('errors', [
                     'Your cross-site request forgery token is not valid'
                 ]);
                 Router::back();
@@ -42,7 +42,7 @@ class Session {
         }
     }
 
-    public static function get(string $key, $default = ''): string {
+    public static function get(string $key, $default = '') {
         if (isset(static::$flash[$key])) {
             return static::$flash[$key];
         } elseif (isset($_SESSION[$key])) {

@@ -28,6 +28,8 @@ spl_autoload_register(function (string $class) {
     }
 });
 
+require ROOT . '/vendor/autoload.php';
+
 require_once ROOT . '/config.php';
 
 if (APP_DEBUG) {
@@ -38,9 +40,8 @@ if (APP_DEBUG) {
 
 Session::start(SESSION_SHORT_COOKIE_NAME);
 
-require_once ROOT . '/core/view.php';
 require_once ROOT . '/core/utils.php';
 
 Database::connect(DATABASE_DSN, DATABASE_USER, DATABASE_PASSWORD);
 
-require_once ROOT . '/routes.php';
+require_once ROOT . '/routes/web.php';

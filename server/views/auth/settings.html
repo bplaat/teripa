@@ -1,0 +1,70 @@
+@view('layout.header', [ 'title' => 'Settings' ])
+
+<h1 class="title">Settings</h1>
+
+@view('layout.messages')
+@view('layout.errors')
+
+<form class="box" method="post" action="/auth/settings/change_details">
+    @view('layout.csrf_token')
+
+    <h2 class="title is-4">Change user details</h2>
+
+    <div class="field">
+        <label class="label" for="username">Username</label>
+        <input class="input" type="text" id="username" name="username" value="{{ old('username', Auth::user()->username) }}" required>
+    </div>
+
+    <div class="field">
+        <label class="label" for="email">Email address</label>
+        <input class="input" type="email" id="email" name="email" value="{{ old('email', Auth::user()->email) }}" required>
+    </div>
+
+    <div class="field">
+        <button class="button is-link" type="submit">Save</button>
+    </div>
+</form>
+
+<form class="box" method="post" action="/auth/settings/change_password">
+    @view('layout.csrf_token')
+
+    <h2 class="title is-4">Change password</h2>
+
+    <div class="field">
+        <label class="label" for="old_password">Old password</label>
+        <input class="input" type="password" id="old_password" name="old_password" required>
+    </div>
+
+    <div class="field">
+        <label class="label" for="password">New password</label>
+        <input class="input" type="password" id="password" name="password" required>
+    </div>
+
+    <div class="field">
+        <label class="label" for="password_confirmation">Confirm new password</label>
+        <input class="input" type="password" id="password_confirmation" name="password_confirmation" required>
+    </div>
+
+    <div class="field">
+        <button class="button is-link" type="submit">Save</button>
+    </div>
+</form>
+
+<div class="box">
+    <h2 class="title is-4">Active sessions</h2>
+    @foreach ($activeSessions as $session):
+        <div class="box content">
+            <h1 class="title is-5">
+                {{ $session->ip_city }}, {{ countryName($session->ip_country) }} ({{ $session->ip }})
+                using {{ $session->browser }} {{ $session->browser_version }} on {{ $session->platform }} {{ $session->platform_version }}
+                @if ($session->session == $_COOKIE[SESSION_COOKIE_NAME]):
+                    <div class="tag is-link" style="margin-left: 8px;">Current session</div>
+                @endif
+            </h1>
+            <p>Created on {{ $session->created_at }}, last used on {{ $session->updated_at }} and expires on {{ $session->expires_at }}</p>
+            <p><a class="button is-danger" href="/auth/sessions/{{ $session->id }}/revoke">Revoke session</a></p>
+        </div>
+    @endforeach
+</div>
+
+@view('layout.footer')

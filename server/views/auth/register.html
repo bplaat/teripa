@@ -1,11 +1,11 @@
-@view('header', [ 'title' => 'Register' ])
+@view('layout.header', [ 'title' => 'Register' ])
 
 <h1 class="title">Register</h1>
 
-@view('errors')
+@view('layout.errors')
 
 <form method="post">
-    @csrf_token()
+    @view('layout.csrf_token')
 
     <div class="field">
         <label class="label" for="username">Username</label>
@@ -32,4 +32,4 @@
     </div>
 </form>
 
-@view('footer')
+@view('layout.footer')

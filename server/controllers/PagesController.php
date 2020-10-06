@@ -7,6 +7,6 @@ class PagesController {
 
     public static function notFound(): string {
         http_response_code(404);
-        return view('not-found');
+        return view('not_found');
     }
 }
