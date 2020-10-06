@@ -1,0 +1,35 @@
+@view('header', [ 'title' => 'Register' ])
+
+<h1 class="title">Register</h1>
+
+@view('errors')
+
+<form method="post">
+    @csrf_token()
+
+    <div class="field">
+        <label class="label" for="username">Username</label>
+        <input class="input" type="text" id="username" name="username" value="{{ old('username') }}" required>
+    </div>
+
+    <div class="field">
+        <label class="label" for="email">Email address</label>
+        <input class="input" type="email" id="email" name="email" value="{{ old('email') }}" required>
+    </div>
+
+    <div class="field">
+        <label class="label" for="password">Password</label>
+        <input class="input" type="password" id="password" name="password" required>
+    </div>
+
+    <div class="field">
+        <label class="label" for="password_confirmation">Confirm password</label>
+        <input class="input" type="password" id="password_confirmation" name="password_confirmation" required>
+    </div>
+
+    <div class="field">
+        <button class="button is-link" type="submit">Register</button>
+    </div>
+</form>
+
+@view('footer')

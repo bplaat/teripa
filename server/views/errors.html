@@ -1,0 +1,8 @@
+@if (Session::get('errors') != ''):
+    <div class="notification is-danger">
+        <button class="delete"></button>
+        @foreach (Session::get('errors') as $error):
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+@endif

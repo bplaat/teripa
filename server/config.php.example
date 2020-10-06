@@ -1,0 +1,14 @@
+<?php
+
+define('APP_NAME', 'Battle of Teripa');
+define('APP_VERSION', '2.0.0');
+define('APP_DEBUG', isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'teripa.local');
+
+define('DATABASE_DSN', 'mysql:host=127.0.0.1;dbname=teripa;charset=utf8mb4');
+define('DATABASE_USER', 'teripa');
+define('DATABASE_PASSWORD', 'teripa');
+
+define('SESSION_COOKIE_NAME', 'teripa_session');
+define('SESSION_DURATION', 60 * 60 * 24 * 356);
+define('SESSION_UPDATE_DURATION', 60);
+define('SESSION_SHORT_COOKIE_NAME', 'teripa_short_session');

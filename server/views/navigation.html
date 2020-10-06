@@ -1,0 +1,24 @@
+<div class="navbar is-light is-fixed-top">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item has-text-weight-bold" href="/">
+                Battle of Teripa
+            </a>
+            <a id="navbar-burger" class="navbar-burger burger"><span></span><span></span><span></span></a>
+        </div>
+        <div id="navbar-menu" class="navbar-menu">
+            @if (false):
+
+            @else:
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a class="button is-link" href="/auth/login">Login</a>
+                            <a class="button" href="/auth/register">Register</a>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </div>
+    </div>
+</div>
