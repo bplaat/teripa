@@ -39,9 +39,7 @@ class Auth {
         return $session;
     }
 
-    public static function updateSession(): void {
-        $session = $_COOKIE[SESSION_COOKIE_NAME];
-
+    public static function updateSession(string $session): void {
         $ip = getIP();
         $ipInfo = json_decode(file_get_contents('https://ipinfo.io/' . $ip . '/json'));
         $ipLocation = explode(',', $ipInfo->loc ?? '');
@@ -61,7 +59,9 @@ class Auth {
             'browser' => $browser,
             'browser_version' => $agent->version($browser),
             'platform' => $platform,
-            'platform_version' => $agent->version($platform)
+            'platform_version' => $agent->version($platform),
+
+            'updated_at' => date('Y-m-d H:i:s')
         ]);
     }
 
@@ -108,10 +108,10 @@ class Auth {
             $sessionQuery = Sessions::select([ 'session' => $_COOKIE[SESSION_COOKIE_NAME] ]);
             if ($sessionQuery->rowCount() == 1) {
                 $session = $sessionQuery->fetch();
-                if (strtotime($session->expires_at) > time()) {
+                if (strtotime($session->expires_at) >= time()) {
                     static::$user = Users::select($session->user_id)->fetch();
-                    if (strtotime($session->updated_at) + SESSION_UPDATE_DURATION < time()) {
-                        Auth::updateSession();
+                    if (strtotime($session->updated_at) + SESSION_UPDATE_DURATION <= time()) {
+                        Auth::updateSession($session->session);
                     }
                 } else {
                     static::revokeSession($session->session);

@@ -2,7 +2,7 @@
 
 class SettingsController {
     public static function showSettingsForm(): string {
-        Auth::updateSession();
+        Auth::updateSession($_COOKIE[SESSION_COOKIE_NAME]);
 
         $activeSessions = Sessions::selectActiveByUser(Auth::id())->fetchAll();
         return view('auth.settings', [

@@ -61,7 +61,7 @@
                     <div class="tag is-link" style="margin-left: 8px;">Current session</div>
                 @endif
             </h1>
-            <p>Created on {{ $session->created_at }}, last used on {{ $session->updated_at }} and expires on {{ $session->expires_at }}</p>
+            <p>Created on <b>{{ $session->created_at }}</b>, last used on <b>{{ $session->updated_at }}</b> and expires on <b>{{ $session->expires_at }}</b></p>
             <p><a class="button is-danger" href="/auth/sessions/{{ $session->id }}/revoke">Revoke session</a></p>
         </div>
     @endforeach

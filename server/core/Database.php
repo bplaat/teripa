@@ -1,7 +1,7 @@
 <?php
 
 class Database {
-    protected static PDO $pdo;
+    protected static ?PDO $pdo;
 
     protected static int $queryCount;
 
@@ -12,6 +12,10 @@ class Database {
             PDO::ATTR_EMULATE_PREPARES => false
         ]);
         static::$queryCount = 0;
+    }
+
+    public static function disconnect(): void {
+        static::$pdo = null;
     }
 
     public static function queryCount() : int {

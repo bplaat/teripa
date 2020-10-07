@@ -3,6 +3,9 @@
 Router::any('/', 'PagesController::home');
 
 if (Auth::check()) {
+    Router::get('/legacy', 'LegacyController::showLegacyEmbed');
+    Router::get('/legacy/embed', 'LegacyController::embed');
+
     Router::get('/auth/settings', 'SettingsController::showSettingsForm');
     Router::post('/auth/settings/change_details', 'SettingsController::changeDetails');
     Router::post('/auth/settings/change_password', 'SettingsController::changePassword');

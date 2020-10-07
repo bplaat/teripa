@@ -27,7 +27,7 @@ class AuthController {
             'password' => Users::PASSWORD_VALIDATION
         ]);
 
-        $userId = Users::insert([
+        $userId = Users::create([
             'username' => request('username'),
             'email' => request('email'),
             'password' => password_hash(request('password'), PASSWORD_DEFAULT)

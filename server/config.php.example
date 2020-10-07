@@ -12,3 +12,9 @@ define('SESSION_COOKIE_NAME', 'teripa_session');
 define('SESSION_DURATION', 60 * 60 * 24 * 356);
 define('SESSION_UPDATE_DURATION', 60 * 5);
 define('SESSION_SHORT_COOKIE_NAME', 'teripa_short_session');
+
+define('LEGACY_FOOD_DEFAULT', 2000);
+define('LEGACY_WOOD_DEFAULT', 2000);
+define('LEGACY_GOLD_DEFAULT', 2000);
+define('LEGACY_MAP_DEFAULT', '[[\"01\",\"01\",\"01\",\"00\",\"00\"],[\"01\",\"01\",\"00\",\"00\",\"00\"],[\"01\",\"00\",\"20\",\"00\",\"02\"],[\"00\",\"00\",\"00\",\"02\",\"02\"],[\"00\",\"00\",\"02\",\"02\",\"02\"]]');
+define('LEGACY_UNITS_DEFAULT', '[0,0,0,0]');
