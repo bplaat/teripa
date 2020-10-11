@@ -15,8 +15,18 @@ class Auth {
         $ipLocation = explode(',', $ipInfo->loc ?? '');
 
         $agent = new Agent();
+
         $browser = $agent->browser();
+        if ($browser == false) $browser = '?';
+
+        $browser_version = $agent->version($browser);
+        if ($browser_version == false) $browser_version = '?';
+
         $platform = $agent->platform();
+        if ($platform == false) $platform = '?';
+
+        $platform_version = $agent->version($platform);
+        if ($platform_version == false) $platform_version = '?';
 
         Sessions::insert([
             'session' => $session,
@@ -27,9 +37,9 @@ class Auth {
             'ip_lat' => $ipLocation[0] ?? 0,
             'ip_lng' => $ipLocation[1] ?? 0,
             'browser' => $browser,
-            'browser_version' => $agent->version($browser),
+            'browser_version' => $browser_version,
             'platform' => $platform,
-            'platform_version' => $agent->version($platform),
+            'platform_version' =>  $platform_version,
             'expires_at' => date('Y-m-d H:i:s', time() + SESSION_DURATION)
         ]);
 
@@ -45,8 +55,18 @@ class Auth {
         $ipLocation = explode(',', $ipInfo->loc ?? '');
 
         $agent = new Agent();
+
         $browser = $agent->browser();
+        if ($browser == false) $browser = '?';
+
+        $browser_version = $agent->version($browser);
+        if ($browser_version == false) $browser_version = '?';
+
         $platform = $agent->platform();
+        if ($platform == false) $platform = '?';
+
+        $platform_version = $agent->version($platform);
+        if ($platform_version == false) $platform_version = '?';
 
         Sessions::update([
             'session' => $session
@@ -57,9 +77,9 @@ class Auth {
             'ip_lat' => $ipLocation[0] ?? 0,
             'ip_lng' => $ipLocation[1] ?? 0,
             'browser' => $browser,
-            'browser_version' => $agent->version($browser),
+            'browser_version' => $browser_version,
             'platform' => $platform,
-            'platform_version' => $agent->version($platform),
+            'platform_version' =>  $platform_version,
 
             'updated_at' => date('Y-m-d H:i:s')
         ]);
