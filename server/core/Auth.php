@@ -130,6 +130,7 @@ class Auth {
                 $session = $sessionQuery->fetch();
                 if (strtotime($session->expires_at) >= time()) {
                     static::$user = Users::select($session->user_id)->fetch();
+
                     if (strtotime($session->updated_at) + SESSION_UPDATE_DURATION <= time()) {
                         Auth::updateSession($session->session);
                     }
