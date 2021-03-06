@@ -10,6 +10,6 @@ class Sessions extends Model {
     }
 
     public static function selectActiveByUser(int $userId): PDOStatement {
-        return Database::query('SELECT * FROM `sessions` WHERE `user_id` = ? AND `expires_at` > NOW() ORDER BY `updated_at` DESC', $userId);
+        return Database::query('SELECT * FROM `sessions` WHERE `user_id` = ? AND `expires_at` > ? ORDER BY `updated_at` DESC', $userId, date('Y-m-d H:i:s'));
     }
 }

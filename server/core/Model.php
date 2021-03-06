@@ -17,7 +17,7 @@ abstract class Model {
         if (is_null($where)) {
             return Database::query('SELECT * FROM `' . static::table() . '`');
         } else {
-            if (!is_array($where)) $where = [ static::$primaryKey => $where ];
+            if (!is_array($where)) $where = [ static::primaryKey() => $where ];
             foreach ($where as $key => $value) $wheres[] = '`' . $key . '` = ?';
             return Database::query('SELECT * FROM `' . static::table() . '` WHERE ' . implode(' AND ', $wheres), ...array_values($where));
         }
@@ -30,7 +30,7 @@ abstract class Model {
     }
 
     public static function update($where, array $values): PDOStatement {
-        if (!is_array($where)) $where = [ static::$primaryKey => $where ];
+        if (!is_array($where)) $where = [ static::primaryKey() => $where ];
         foreach ($values as $key => $value) $sets[] = '`' . $key . '` = ?';
         foreach ($where as $key => $value) $wheres[] = '`' . $key . '` = ?';
         return Database::query('UPDATE `' . static::table() . '` SET ' . implode(', ', $sets) . ' ' .
@@ -38,7 +38,7 @@ abstract class Model {
     }
 
     public static function delete($where): PDOStatement {
-        if (!is_array($where)) $where = [ static::$primaryKey => $where ];
+        if (!is_array($where)) $where = [ static::primaryKey() => $where ];
         foreach ($where as $key => $value) $wheres[] = '`' . $key . '` = ?';
         return Database::query('DELETE FROM `' . static::table() . '` WHERE ' . implode(' AND ', $wheres), ...array_values($where));
     }

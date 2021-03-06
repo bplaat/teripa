@@ -86,15 +86,14 @@ class Auth {
     }
 
     public static function revokeSession(string $session): void {
-        static::$user = null;
-
         Sessions::update([
             'session' => $session
         ], [
             'expires_at' => date('Y-m-d H:i:s')
         ]);
 
-        if ($_COOKIE[SESSION_COOKIE_NAME] == $session) {
+        if ($session == $_COOKIE[SESSION_COOKIE_NAME]) {
+            static::$user = null;
             unset($_COOKIE[SESSION_COOKIE_NAME]);
             setcookie(SESSION_COOKIE_NAME, '', time() - 3600, '/', $_SERVER['HTTP_HOST'], isset($_SERVER['HTTPS']), true);
         }
@@ -128,6 +127,7 @@ class Auth {
             $sessionQuery = Sessions::select([ 'session' => $_COOKIE[SESSION_COOKIE_NAME] ]);
             if ($sessionQuery->rowCount() == 1) {
                 $session = $sessionQuery->fetch();
+
                 if (strtotime($session->expires_at) >= time()) {
                     static::$user = Users::select($session->user_id)->fetch();
 

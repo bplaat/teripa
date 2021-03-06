@@ -5,48 +5,67 @@
 @view('layout.messages')
 @view('layout.errors')
 
-<form class="box" method="post" action="/auth/settings/change_details">
+<form class="box" method="POST" action="/auth/settings/change_details">
     @view('layout.csrf_token')
 
     <h2 class="title is-4">Change user details</h2>
 
     <div class="field">
         <label class="label" for="username">Username</label>
-        <input class="input" type="text" id="username" name="username" value="{{ old('username', Auth::user()->username) }}" required>
+
+        <div class="control">
+            <input class="input" type="text" id="username" name="username" value="{{ old('username', Auth::user()->username) }}" required>
+        </div>
     </div>
 
     <div class="field">
         <label class="label" for="email">Email address</label>
-        <input class="input" type="email" id="email" name="email" value="{{ old('email', Auth::user()->email) }}" required>
+
+        <div class="control">
+            <input class="input" type="email" id="email" name="email" value="{{ old('email', Auth::user()->email) }}" required>
+        </div>
     </div>
 
     <div class="field">
-        <button class="button is-link" type="submit">Save</button>
+        <div class="control">
+            <button class="button is-link" type="submit">Save</button>
+        </div>
     </div>
 </form>
 
-<form class="box" method="post" action="/auth/settings/change_password">
+<form class="box" method="POST" action="/auth/settings/change_password">
     @view('layout.csrf_token')
 
     <h2 class="title is-4">Change password</h2>
 
     <div class="field">
         <label class="label" for="old_password">Old password</label>
-        <input class="input" type="password" id="old_password" name="old_password" required>
+
+        <div class="control">
+            <input class="input" type="password" id="old_password" name="old_password" required>
+        </div>
     </div>
 
     <div class="field">
         <label class="label" for="password">New password</label>
-        <input class="input" type="password" id="password" name="password" required>
+
+        <div class="control">
+            <input class="input" type="password" id="password" name="password" required>
+        </div>
     </div>
 
     <div class="field">
         <label class="label" for="password_confirmation">Confirm new password</label>
-        <input class="input" type="password" id="password_confirmation" name="password_confirmation" required>
+
+        <div class="control">
+            <input class="input" type="password" id="password_confirmation" name="password_confirmation" required>
+        </div>
     </div>
 
     <div class="field">
-        <button class="button is-link" type="submit">Save</button>
+        <div class="control">
+            <button class="button is-link" type="submit">Save</button>
+        </div>
     </div>
 </form>
 
