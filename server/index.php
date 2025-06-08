@@ -6,6 +6,8 @@
  * SPDX-License-Identifier: MIT
  */
 
+ini_set('display_errors', '0');
+
 $db = new mysqli($_ENV['DB_HOST'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD'], $_ENV['DB_NAME']);
 
 $db->query("CREATE TABLE IF NOT EXISTS bot (
