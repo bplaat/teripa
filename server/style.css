@@ -1,0 +1,136 @@
+body,
+input,
+button {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  color: #222;
+  padding: 16px;
+}
+
+a {
+  color: #16c;
+}
+
+input,
+button {
+  padding: 4px 8px;
+}
+
+.main {
+  border: 4px solid #ccc;
+  padding: 8px 24px;
+}
+
+.main.container {
+  position: relative;
+  padding: 0;
+  width: 640px;
+  height: 480px;
+}
+
+.container,
+table {
+  font: inherit;
+  line-height: 1.2;
+  color: #fff
+}
+
+.container {
+  background: #000
+}
+
+.container a {
+  color: inherit;
+  outline: 0
+}
+
+.bar {
+  font-size: 14px;
+  line-height: 20px;
+  padding: 0 3px
+}
+
+.right {
+  float: right
+}
+
+.page {
+  background: #666;
+  padding: 30px;
+  height: 400px;
+  overflow: auto
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 16px
+}
+
+label,
+input {
+  display: block;
+  margin-bottom: 8px
+}
+
+table {
+  width: 100%
+}
+
+.tile {
+  display: block;
+  float: left;
+  width: 128px;
+  height: 92px;
+  background-image: url(/teripa.png)
+}
+
+.title-logo {
+  font-size: 48px;
+  margin-bottom: 8px
+}
+
+.slogan {
+  font-size: 18px;
+  margin-bottom: 24px
+}
+
+.close {
+  text-decoration: none
+}
+
+.begin {
+  padding: 48px 64px;
+  height: 384px;
+  background: #666
+}
+
+.unit {
+  display: inline-block;
+  vertical-align: middle;
+  width: 32px;
+  height: 32px;
+  background-image: url(/teripa.png);
+  border: 1px solid #000
+}
+
+th {
+  text-align: left
+}
+
+.inline {
+  display: inline;
+  margin: 0
+}
+
+.inline>input {
+  display: inline;
+  vertical-align: middle
+}

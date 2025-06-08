@@ -1,0 +1,24 @@
+services:
+  teripa:
+    image: teripa
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: teripa-mysql:3306
+      DB_USER: teripa
+      DB_PASSWORD: teripa
+      DB_NAME: teripa
+    depends_on:
+      - teripa-mysql
+
+  teripa-mysql:
+    image: mysql:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: teripa
+      MYSQL_USER: teripa
+      MYSQL_PASSWORD: teripa
+      MYSQL_DATABASE: teripa
+    volumes:
+      - ./mysql:/var/lib/mysql
