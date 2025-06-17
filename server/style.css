@@ -59,7 +59,8 @@ table {
 }
 
 .right {
-  float: right
+  position: absolute;
+  right: 0;
 }
 
 .page {
